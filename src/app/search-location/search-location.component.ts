@@ -2,6 +2,8 @@ import { ApiHttpService } from './../services/api-http.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { getFetchUrl } from '../services/url-paths';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-search-location',
@@ -9,17 +11,22 @@ import { getFetchUrl } from '../services/url-paths';
   styleUrls: ['./search-location.component.sass'],
 })
 export class SearchLocationComponent {
-  sport = false;
-  aventures = false;
-  culture = false;
-  food = false;
-  others = false;
+  preferencesForm: FormGroup;
   searched = false;
   loaded = false;
   displayedColumns: string[] = ['name', 'country'];
   dataSource:Location[] = [];
 
-  constructor(private apiService: ApiHttpService, private router: Router) {}
+  constructor(private apiService: ApiHttpService, private router: Router,private fb: FormBuilder) {
+        // Initialize the form group with form controls for each checkbox
+        this.preferencesForm = this.fb.group({
+          sport: [false],
+          aventures: [false],
+          culture: [false],
+          food: [false],
+          others: [false]
+        });
+  }
 
   getLocations(cityCountry: string) {
     const data = getCityAndCountry(cityCountry);
@@ -42,20 +49,22 @@ export class SearchLocationComponent {
     });
   }
 
+  public checkboxStatus(event: MatCheckboxChange,id:string) {
+    const preferences = this.preferencesForm.value;
+    preferences[id]=!preferences[id];
+  };
+
   selectedLocation(selectedLocation: Location) {
+    const preferences = this.preferencesForm.value; // Get the current states of checkboxes
+    console.log('Selected Location Preferences:', preferences);
+
     this.router.navigate(['/weather'], {
       queryParams: {
         name: selectedLocation.name,
         country: selectedLocation.country,
         lat: selectedLocation.lat,
         lon: selectedLocation.lon,
-        preferences: JSON.stringify({
-          sport: this.sport,
-          aventures: this.aventures,
-          culture: this.culture,
-          food: this.food,
-          others: this.food
-        })
+        preferences: JSON.stringify(preferences)
       },
     });
   }

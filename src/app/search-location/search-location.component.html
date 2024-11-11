@@ -7,11 +7,11 @@
   </div>
   <h2 class="example-h2">Escoge tus preferencias</h2>
   <section class="example-section">
-    <mat-checkbox class="example-margin" formControlName="sport">Deportes</mat-checkbox>
-    <mat-checkbox class="example-margin" formControlName="aventures">Aventuras</mat-checkbox>
-    <mat-checkbox class="example-margin" formControlName="culture">Cultura</mat-checkbox>
-    <mat-checkbox class="example-margin" formControlName="food">Gastronomía</mat-checkbox>
-    <mat-checkbox class="example-margin" formControlName="others">Otros</mat-checkbox>
+    <mat-checkbox class="example-margin" formControlName="sport" (change)="checkboxStatus($event,'sport')">Deportes</mat-checkbox>
+    <mat-checkbox class="example-margin" formControlName="aventures" (change)="checkboxStatus($event,'aventures')">Aventuras</mat-checkbox>
+    <mat-checkbox class="example-margin" formControlName="culture" (change)="checkboxStatus($event,'culture')">Cultura</mat-checkbox>
+    <mat-checkbox class="example-margin" formControlName="food" (change)="checkboxStatus($event,'food')">Gastronomía</mat-checkbox>
+    <mat-checkbox class="example-margin" formControlName="others" (change)="checkboxStatus($event,'others')">Otros</mat-checkbox>
   </section>
   <mat-card class="main">
     <mat-card-content>
