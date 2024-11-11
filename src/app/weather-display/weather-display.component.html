@@ -1,7 +1,7 @@
 <div class="container">
   <div class="mat-typography title">
     <h1>
-      Current weather in <b>{{ name }}, {{ country }}</b>
+      Climatología en <b>{{ name }}, {{ country }}</b>
     </h1>
   </div>
   <mat-card class="main">
@@ -28,14 +28,14 @@
         <mat-divider [vertical]="true"></mat-divider>
         <div>
           <p style="margin-top: 10px">
-            Feels like: {{ temperatureFeelsLike }}&deg;C
+            Sensación térmica: {{ temperatureFeelsLike }}&deg;C
           </p>
-          <p>Humidity: {{ currentWeather.main.humidity }}%</p>
-          <p>Wind: {{ currentWeather.wind.speed }} km/h</p>
-          <p>Clouds: {{ currentWeather.clouds.all }}%</p>
+          <p>Humedad: {{ currentWeather.main.humidity }}%</p>
+          <p>Viento: {{ currentWeather.wind.speed }} km/h</p>
+          <p>Nubosidad: {{ currentWeather.clouds.all }}%</p>
         </div>
       </div>
     </mat-card-content>
   </mat-card>
-  <button mat-stroked-button [routerLink]="'/'">Check another location</button>
+  <button mat-stroked-button [routerLink]="'/'">Busca experiencias en otro lugar</button>
 </div>
