@@ -1,11 +1,7 @@
 import { ApiHttpService } from './../services/api-http.service';
-import { Component,ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { getFetchUrl } from '../services/url-paths';
-import {FormsModule} from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-search-location',

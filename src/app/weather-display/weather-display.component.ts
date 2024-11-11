@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ApiHttpService } from '../services/api-http.service';
 import { getIconUrl, getUrlFromParams } from '../services/url-paths';
-
+import { CsvReaderService } from '../services/csv-reader.service';
 @Component({
   selector: 'app-weather-display',
   templateUrl: './weather-display.component.html',
@@ -16,10 +16,12 @@ export class WeatherDisplayComponent implements OnInit {
   temperatureFeelsLike: number = 0;
   loaded = false;
   iconUrl = '';
+  csvData: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private apiService: ApiHttpService
+    private apiService: ApiHttpService,
+    private csvReaderService: CsvReaderService
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,20 @@ export class WeatherDisplayComponent implements OnInit {
         error: (err) => console.error(err),
       });
     });
+    getCSVData();
   }
+}
+
+function getCSVData(this: any){
+  this.csvReaderService.readCsv('../../../agenda-cultural-bizkaia-2023.csv').subscribe({
+    next: (data: any) => {
+      this.csvData = data;
+      console.log(this.csvData); // Displays parsed CSV data in the console
+    },
+    error: (error: any) => {
+      console.error('Error reading CSV file:', error);
+    }
+  });
 }
 
 export function getInfoFromParams(params: Params) {
