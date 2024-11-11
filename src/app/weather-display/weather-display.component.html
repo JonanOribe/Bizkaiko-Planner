@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="mat-typography title">
+    <h1>
+      Current weather in <b>{{ name }}, {{ country }}</b>
+    </h1>
+  </div>
+  <mat-card class="main">
+    <mat-card-content>
+      <mat-spinner *ngIf="!loaded"></mat-spinner>
+      <div *ngIf="loaded" class="content">
+        <div>
+          <img [src]="iconUrl" alt="Current weather icon" />
+          <p
+            [ngClass]="{
+              blue: temperature < 5,
+              yellow: 5 < temperature && temperature < 15,
+              orange: 15 < temperature && temperature < 25,
+              red: temperature > 25
+            }"
+          >
+            {{ temperature }}&deg;C
+          </p>
+          <p>
+            {{ currentWeather.weather[0].main }}:
+            {{ currentWeather.weather[0].description }}
+          </p>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div>
+          <p style="margin-top: 10px">
+            Feels like: {{ temperatureFeelsLike }}&deg;C
+          </p>
+          <p>Pressure: {{ currentWeather.main.pressure }} hPa</p>
+          <p>Humidity: {{ currentWeather.main.humidity }}%</p>
+          <p>Wind: {{ currentWeather.wind.speed }} km/h</p>
+          <p>Clouds: {{ currentWeather.clouds.all }}%</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <button mat-stroked-button [routerLink]="'/'">Check another location</button>
+</div>
