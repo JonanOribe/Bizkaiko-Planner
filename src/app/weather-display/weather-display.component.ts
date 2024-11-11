@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ApiHttpService } from '../services/api-http.service';
 import { getIconUrl, getUrlFromParams } from '../services/url-paths';
-import { CsvReaderService } from '../services/csv-reader.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import * as Papa from 'papaparse';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-weather-display',
   templateUrl: './weather-display.component.html',
@@ -21,7 +25,7 @@ export class WeatherDisplayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiHttpService,
-    private csvReaderService: CsvReaderService
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -51,20 +55,29 @@ export class WeatherDisplayComponent implements OnInit {
         error: (err) => console.error(err),
       });
     });
-    getCSVData();
-  }
-}
 
-function getCSVData(this: any){
-  this.csvReaderService.readCsv('../../../agenda-cultural-bizkaia-2023.csv').subscribe({
-    next: (data: any) => {
-      this.csvData = data;
-      console.log(this.csvData); // Displays parsed CSV data in the console
-    },
-    error: (error: any) => {
-      console.error('Error reading CSV file:', error);
-    }
-  });
+    // Use `this.readCsv` instead of `readCsv`
+    this.readCsv('assets/agenda-cultural-bizkaia-2023.csv').subscribe({
+      next: (data) => {
+        this.csvData = data;
+        console.log('CSV Data:', this.csvData);
+      },
+      error: (error) => console.error('Error reading CSV file:', error),
+    });
+  }
+
+  // Move readCsv inside the class
+  readCsv(filePath: string): Observable<any[]> {
+    return this.http.get(filePath, { responseType: 'text' }).pipe(
+      map((csvData: string) => {
+        const parsedData = Papa.parse(csvData, {
+          header: true,
+          skipEmptyLines: true,
+        });
+        return parsedData.data;
+      })
+    );
+  }
 }
 
 export function getInfoFromParams(params: Params) {
