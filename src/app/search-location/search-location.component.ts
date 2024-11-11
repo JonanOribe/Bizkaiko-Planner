@@ -53,7 +53,13 @@ export class SearchLocationComponent {
         country: selectedLocation.country,
         lat: selectedLocation.lat,
         lon: selectedLocation.lon,
-        preferences: ['Eco','Teco']
+        preferences: JSON.stringify({
+          sport: this.sport,
+          aventures: this.aventures,
+          culture: this.culture,
+          food: this.food,
+          others: this.food
+        })
       },
     });
   }
