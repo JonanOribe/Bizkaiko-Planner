@@ -53,6 +53,7 @@ export class SearchLocationComponent {
         country: selectedLocation.country,
         lat: selectedLocation.lat,
         lon: selectedLocation.lon,
+        preferences: ['Eco','Teco']
       },
     });
   }
