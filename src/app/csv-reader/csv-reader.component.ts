@@ -34,6 +34,7 @@ export class CsvReaderComponent {
       header: true,
       complete: (result: { data: any; }) => {
         this.csvData = result.data;
+        console.log(this.csvData);
       },
       error: (error: any) => {
         console.error('Error parsing CSV:', error);

@@ -17,12 +17,9 @@
               orange: 15 < temperature && temperature < 25,
               red: temperature > 25
             }"
+            style="text-align: center;"
           >
             {{ temperature }}&deg;C
-          </p>
-          <p>
-            {{ currentWeather.weather[0].main }}:
-            {{ currentWeather.weather[0].description }}
           </p>
         </div>
         <mat-divider [vertical]="true"></mat-divider>
@@ -37,5 +34,6 @@
       </div>
     </mat-card-content>
   </mat-card>
+  <app-csv-reader></app-csv-reader>
   <button mat-stroked-button [routerLink]="'/'">Busca experiencias en otro lugar</button>
 </div>
