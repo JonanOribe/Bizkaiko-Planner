@@ -1,0 +1,5 @@
+<form [formGroup]="csvForm">
+  <input type="file" (change)="onFileChange($event)" />
+</form>
+<pre>{{ csvData | json }}</pre>
+

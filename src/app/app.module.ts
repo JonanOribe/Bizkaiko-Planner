@@ -15,14 +15,20 @@ import { ApiHttpService } from './services/api-http.service';
 import { WeatherDisplayComponent } from './weather-display/weather-display.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CsvReaderComponent } from './csv-reader/csv-reader.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Papa } from 'ngx-papaparse';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchLocationComponent,
     WeatherDisplayComponent,
+    CsvReaderComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -35,6 +41,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     MatDividerModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [ApiHttpService],
   bootstrap: [AppComponent],

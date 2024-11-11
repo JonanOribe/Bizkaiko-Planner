@@ -1,7 +1,11 @@
 import { ApiHttpService } from './../services/api-http.service';
-import { Component } from '@angular/core';
+import { Component,ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { getFetchUrl } from '../services/url-paths';
+import {FormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-search-location',
@@ -9,6 +13,11 @@ import { getFetchUrl } from '../services/url-paths';
   styleUrls: ['./search-location.component.sass'],
 })
 export class SearchLocationComponent {
+  sport = false;
+  aventures = false;
+  culture = false;
+  food = false;
+  others = false;
   searched = false;
   loaded = false;
   displayedColumns: string[] = ['name', 'country'];
