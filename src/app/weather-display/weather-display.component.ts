@@ -21,6 +21,15 @@ export class WeatherDisplayComponent implements OnInit {
   loaded = false;
   iconUrl = '';
   csvData: any[] = [];
+  // Table columns and data
+  displayedColumns: string[] = ['day', 'minTemp', 'maxTemp', 'humidity'];
+  dataSource = [
+    { day: 'Monday', minTemp: 15, maxTemp: 25, humidity: 60 },
+    { day: 'Tuesday', minTemp: 17, maxTemp: 27, humidity: 55 },
+    { day: 'Wednesday', minTemp: 18, maxTemp: 28, humidity: 50 },
+    { day: 'Thursday', minTemp: 16, maxTemp: 26, humidity: 65 },
+    { day: 'Friday', minTemp: 14, maxTemp: 24, humidity: 70 },
+  ];
 
   constructor(
     private route: ActivatedRoute,

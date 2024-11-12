@@ -1,13 +1,31 @@
+<!-- Navbar with user icon on the top left -->
+<div class="navbar" style="border-bottom: 5px #b82927 solid;">
+  <div class="nav-links">
+    <!--
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    -->
+  </div>
+  <div class="user-icon">
+    <i class="fas fa-user-circle"></i>
+  </div>
+</div>
+
 <div class="container">
   <div class="mat-typography title">
     <h1>
       Climatología en <b>{{ name }}, {{ country }}</b>
     </h1>
   </div>
-  <mat-card class="main">
+
+  <mat-card class="main" style="border-bottom: 1px #b82927 solid;">
     <mat-card-content>
       <mat-spinner *ngIf="!loaded"></mat-spinner>
+
       <div *ngIf="loaded" class="content">
+        <!-- Current Weather Display -->
         <div>
           <img [src]="iconUrl" alt="Current weather icon" />
           <p
@@ -22,7 +40,9 @@
             {{ temperature }}&deg;C
           </p>
         </div>
+
         <mat-divider [vertical]="true"></mat-divider>
+
         <div>
           <p style="margin-top: 10px">
             Sensación térmica: {{ temperatureFeelsLike }}&deg;C
@@ -32,7 +52,43 @@
           <p>Nubosidad: {{ currentWeather.clouds.all }}%</p>
         </div>
       </div>
+
+      <!-- Forecast Table -->
+      <div style="margin-top: 20px;">
+        <h2 style="text-align: center;">Actividades recomendadas</h2>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-top: 10px;">
+
+          <!-- Day Column -->
+          <ng-container matColumnDef="day">
+            <th mat-header-cell *matHeaderCellDef>Día</th>
+            <td mat-cell *matCellDef="let element">{{ element.day }}</td>
+          </ng-container>
+
+          <!-- Min Temperature Column -->
+          <ng-container matColumnDef="minTemp">
+            <th mat-header-cell *matHeaderCellDef>Temp Min</th>
+            <td mat-cell *matCellDef="let element">{{ element.minTemp }}&deg;C</td>
+          </ng-container>
+
+          <!-- Max Temperature Column -->
+          <ng-container matColumnDef="maxTemp">
+            <th mat-header-cell *matHeaderCellDef>Temp Max</th>
+            <td mat-cell *matCellDef="let element">{{ element.maxTemp }}&deg;C</td>
+          </ng-container>
+
+          <!-- Humidity Column -->
+          <ng-container matColumnDef="humidity">
+            <th mat-header-cell *matHeaderCellDef>Humedad</th>
+            <td mat-cell *matCellDef="let element">{{ element.humidity }}%</td>
+          </ng-container>
+
+          <!-- Header and Row Declarations -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
     </mat-card-content>
   </mat-card>
+
   <button mat-stroked-button [routerLink]="'/'">Busca experiencias en otro lugar</button>
 </div>
