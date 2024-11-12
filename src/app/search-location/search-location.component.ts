@@ -55,7 +55,7 @@ export class SearchLocationComponent {
   };
 
   selectedLocation(selectedLocation: Location) {
-    const preferences = this.preferencesForm.value; // Get the current states of checkboxes
+    const preferences = this.preferencesForm.value;
     console.log('Selected Location Preferences:', preferences);
 
     this.router.navigate(['/weather'], {
