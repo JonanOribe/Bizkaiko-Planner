@@ -7,7 +7,7 @@ import { DeleteExperienceDialogComponent } from '../delete-experience-dialog/del
 
 interface Experience {
   name: string;
-  category: 'sports' | 'theater' | 'music' | 'other';
+  category: 'deportes' | 'cultura' | 'música' | 'otros';
   rating: number;
 }
 
@@ -20,10 +20,10 @@ export class FavoriteExperiencesComponent {
   // Add "actions" to displayedColumns array
   displayedColumns: string[] = ['name', 'category', 'rating', 'actions'];
   experiences: Experience[] = [
-    { name: 'City Marathon', category: 'sports', rating: 4 },
-    { name: 'Rock Concert', category: 'music', rating: 5 },
-    { name: 'Broadway Show', category: 'theater', rating: 4 },
-    { name: 'Art Festival', category: 'other', rating: 3 }
+    { name: 'City Marathon', category: 'deportes', rating: 4 },
+    { name: 'Rock Concert', category: 'música', rating: 5 },
+    { name: 'Broadway Show', category: 'cultura', rating: 4 },
+    { name: 'Art Festival', category: 'otros', rating: 3 }
   ];
 
   constructor(public dialog: MatDialog) {}
@@ -59,9 +59,9 @@ export class FavoriteExperiencesComponent {
 
   getIcon(category: string): string {
     switch (category) {
-      case 'sports': return 'sports_soccer';
-      case 'theater': return 'theater_comedy';
-      case 'music': return 'music_note';
+      case 'deportes': return 'sports_soccer';
+      case 'culture': return 'theater_comedy';
+      case 'música': return 'music_note';
       default: return 'star';
     }
   }

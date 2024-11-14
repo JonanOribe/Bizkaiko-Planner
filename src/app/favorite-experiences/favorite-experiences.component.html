@@ -5,13 +5,13 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Experience Name </th>
+      <th mat-header-cell *matHeaderCellDef> Nombre del evento </th>
       <td mat-cell *matCellDef="let experience"> {{ experience.name }} </td>
     </ng-container>
 
     <!-- Category Column with Icon -->
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Category </th>
+      <th mat-header-cell *matHeaderCellDef> Categoría </th>
       <td mat-cell *matCellDef="let experience">
         <mat-icon>{{ getIcon(experience.category) }}</mat-icon>
         {{ experience.category | titlecase }}
@@ -31,7 +31,7 @@
 
     <!-- Edit and Delete Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let experience">
         <button mat-icon-button (click)="openEditDialog(experience)">
           <mat-icon>edit</mat-icon>
