@@ -21,7 +21,12 @@ import { Papa } from 'ngx-papaparse';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FavoriteExperiencesComponent } from './favorite-experiences/favorite-experiences.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { EditExperienceDialogComponent } from './edit-experience-dialog/edit-experience-dialog.component';
+import { DeleteExperienceDialogComponent } from './delete-experience-dialog/delete-experience-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +35,14 @@ import { NavbarComponent } from './navbar/navbar.component';
     CsvReaderComponent,
     FavoriteExperiencesComponent,
     NavbarComponent,
+    EditExperienceDialogComponent,
+    DeleteExperienceDialogComponent,
   ],
   imports: [
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    MatDialogModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -47,7 +58,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatProgressSpinnerModule,
     MatCheckboxModule
   ],
-  providers: [ApiHttpService],
+  providers: [ApiHttpService,Papa],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
