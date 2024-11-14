@@ -19,6 +19,8 @@ import { CsvReaderComponent } from './csv-reader/csv-reader.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Papa } from 'ngx-papaparse';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FavoriteExperiencesComponent } from './favorite-experiences/favorite-experiences.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     SearchLocationComponent,
     WeatherDisplayComponent,
     CsvReaderComponent,
+    FavoriteExperiencesComponent,
+    NavbarComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -23,13 +23,14 @@ export class WeatherDisplayComponent implements OnInit {
   csvData: any[] = [];
   // Table columns and data
   displayedColumns: string[] = ['day', 'minTemp', 'maxTemp', 'humidity'];
-  dataSource = [
-    { day: 'Monday', minTemp: 15, maxTemp: 25, humidity: 60 },
-    { day: 'Tuesday', minTemp: 17, maxTemp: 27, humidity: 55 },
-    { day: 'Wednesday', minTemp: 18, maxTemp: 28, humidity: 50 },
-    { day: 'Thursday', minTemp: 16, maxTemp: 26, humidity: 65 },
-    { day: 'Friday', minTemp: 14, maxTemp: 24, humidity: 70 },
-  ];
+  dataSource: any[] = [];
+  //dataSource = [
+  //  { day: 'Monday', minTemp: 15, maxTemp: 25, humidity: 60 },
+  //  { day: 'Tuesday', minTemp: 17, maxTemp: 27, humidity: 55 },
+  //  { day: 'Wednesday', minTemp: 18, maxTemp: 28, humidity: 50 },
+  //  { day: 'Thursday', minTemp: 16, maxTemp: 26, humidity: 65 },
+  //  { day: 'Friday', minTemp: 14, maxTemp: 24, humidity: 70 },
+  //];
 
   constructor(
     private route: ActivatedRoute,
@@ -73,6 +74,8 @@ export class WeatherDisplayComponent implements OnInit {
       },
       error: (error) => console.error('Error reading CSV file:', error),
     });
+
+    this.loadCSVData();
   }
 
   // Move readCsv inside the class
@@ -87,6 +90,26 @@ export class WeatherDisplayComponent implements OnInit {
       })
     );
   }
+
+    // Function to load and parse the CSV file
+    loadCSVData(): void {
+      const csvFilePath = 'assets/agenda-cultural-bizkaia-2023.csv'; // Replace with the correct path to your CSV file
+
+      Papa.parse(csvFilePath, {
+        download: true,
+        header: true,
+        complete: (result) => {
+          // Filter for "sport" activity and get the first 5 entries
+          this.dataSource = result.data
+            .filter((row: any) => row.activity === 'sport') // Adjust 'activity' if column name differs
+            .slice(0, 5); // Limit to first 5 entries
+        },
+        error: (error) => {
+          console.error('Error loading CSV file:', error);
+        }
+      });
+      console.log(this.dataSource)
+    }
 }
 
 export function getInfoFromParams(params: Params) {

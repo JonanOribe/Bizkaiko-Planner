@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SearchLocationComponent } from './search-location/search-location.component';
 import { WeatherDisplayComponent } from './weather-display/weather-display.component';
+import { FavoriteExperiencesComponent } from './favorite-experiences/favorite-experiences.component';
 
 const routes: Routes = [
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   {
     path: 'weather',
     component: WeatherDisplayComponent
-  }
+  },
+  { path: 'favorite-experiences', component: FavoriteExperiencesComponent },
 ];
 
 @NgModule({
