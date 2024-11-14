@@ -60,7 +60,7 @@ export class FavoriteExperiencesComponent {
   getIcon(category: string): string {
     switch (category) {
       case 'deportes': return 'sports_soccer';
-      case 'culture': return 'theater_comedy';
+      case 'cultura': return 'theater_comedy';
       case 'música': return 'music_note';
       default: return 'star';
     }

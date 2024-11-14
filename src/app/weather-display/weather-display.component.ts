@@ -22,14 +22,13 @@ export class WeatherDisplayComponent implements OnInit {
   iconUrl = '';
   csvData: any[] = [];
   // Table columns and data
-  displayedColumns: string[] = ['name', 'category', 'price'];
+  displayedColumns: string[] = ['name', 'category', 'price','url'];
   //dataSource: any[] = [];
   dataSource = [
-    { name: 'Monday', category: 15, price: 25 },
-    { name: 'Tuesday', category: 17, price: 27 },
-    { name: 'Wednesday', category: 18, price: 28 },
-    { name: 'Thursday', category: 16, price: 26 },
-    { name: 'Friday', category: 14, price: 24 },
+    { name: 'Antzerki partehartzailea, Dantza eta Performance-Arte biziak', category: 'cultura', price: 25,url:'https://www.google.com' },
+    { name: 'Concierto Coral', category: 'música', price: 27,url:'https://www.google.com' },
+    { name: 'Bizkaikoa. Ibiltari Arrigorriaga: Komikia', category: 'cultura', price: 28,url:'https://www.google.com' },
+    { name: 'Itsasmuseum Bilbao. Umeentzako jarduerak. Atlantidaren altxorrak', category: 'cultura', price: 26,url:'https://www.google.com' },
   ];
 
   constructor(
@@ -110,6 +109,14 @@ export class WeatherDisplayComponent implements OnInit {
     //  });
     //  console.log(this.dataSource)
     //}
+    getIcon(category: string): string {
+      switch (category) {
+        case 'deportes': return 'sports_soccer';
+        case 'cultura': return 'theater_comedy';
+        case 'música': return 'music_note';
+        default: return 'star';
+      }
+    }
 }
 
 export function getInfoFromParams(params: Params) {
