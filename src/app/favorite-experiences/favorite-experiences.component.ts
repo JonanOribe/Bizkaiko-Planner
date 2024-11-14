@@ -20,10 +20,10 @@ export class FavoriteExperiencesComponent {
   // Add "actions" to displayedColumns array
   displayedColumns: string[] = ['name', 'category', 'rating', 'actions'];
   experiences: Experience[] = [
-    { name: 'City Marathon', category: 'deportes', rating: 4 },
-    { name: 'Rock Concert', category: 'música', rating: 5 },
-    { name: 'Broadway Show', category: 'cultura', rating: 4 },
-    { name: 'Art Festival', category: 'otros', rating: 3 }
+    { name: 'Bermeoko San Silbestrea 2023', category: 'deportes', rating: 4 },
+    { name: 'Concierto Coral', category: 'música', rating: 5 },
+    { name: 'Bilboko Berreginen Museoa. Gau Irekia 2023', category: 'cultura', rating: 4 },
+    { name: 'Taller de pintura de TOTE BAG', category: 'otros', rating: 3 }
   ];
 
   constructor(public dialog: MatDialog) {}

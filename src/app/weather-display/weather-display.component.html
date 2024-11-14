@@ -122,27 +122,21 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-top: 10px;">
 
           <!-- Day Column -->
-          <ng-container matColumnDef="day">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Día</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.day }}</td>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Nombre del evento</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.name }}</td>
           </ng-container>
 
           <!-- Min Temperature Column -->
-          <ng-container matColumnDef="minTemp">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Temp Min</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.minTemp }}&deg;C</td>
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Categoría</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.category }}</td>
           </ng-container>
 
           <!-- Max Temperature Column -->
-          <ng-container matColumnDef="maxTemp">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Temp Max</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.maxTemp }}&deg;C</td>
-          </ng-container>
-
-          <!-- Humidity Column -->
-          <ng-container matColumnDef="humidity">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Humedad</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.humidity }}%</td>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Precio</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element.price }}</td>
           </ng-container>
 
           <!-- Header and Row Declarations -->
