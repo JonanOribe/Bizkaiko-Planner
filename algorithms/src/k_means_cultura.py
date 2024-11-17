@@ -4,6 +4,7 @@ from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import os
+import json
 
 current_directory = os.getcwd()
 
@@ -65,4 +66,9 @@ def generate_cluster_cultura():
         cluster_elements = data_with_clusters[data_with_clusters['Cluster'] == cluster]
         print(f"\nCluster {cluster}:\n")
         print(cluster_elements[relevant_columns].to_string(index=False))
-    return True
+    
+    # Save the clustered data to a CSV file (optional)
+    output_path = 'clustered_data_output_cultura.csv'  # Replace with your desired output path
+    data_with_clusters.to_json(output_path, index=False)
+    json_dump = json.dumps(json.loads(data_with_clusters.to_json(orient="records")))
+    return json_dump
