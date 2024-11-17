@@ -6,7 +6,7 @@ from src.k_means_cultura import *
 from src.k_means_deporte import *
 import uvicorn
 from typing import List
-from typing import Any
+from fastapi.middleware.cors import CORSMiddleware
 
 # Define the input schema
 class DataItem(BaseModel):
@@ -19,6 +19,15 @@ class DataArray(BaseModel):
 
 # Initialize the FastAPI app
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace "*" with specific origins if needed, e.g., ["http://localhost:4200"]
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods (POST, GET, OPTIONS, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # Define a route for clustering
 @app.post("/cluster_cultura/")
@@ -50,4 +59,4 @@ async def cluster_deporte(input_data: DataArray):
         return JSONResponse({"error": str(e)}, status_code=500)
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8006)
