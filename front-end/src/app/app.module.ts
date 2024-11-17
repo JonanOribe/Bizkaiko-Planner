@@ -16,7 +16,7 @@ import { WeatherDisplayComponent } from './weather-display/weather-display.compo
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CsvReaderComponent } from './csv-reader/csv-reader.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { Papa } from 'ngx-papaparse';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FavoriteExperiencesComponent } from './favorite-experiences/favorite-experiences.component';
@@ -24,9 +24,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { EditExperienceDialogComponent } from './edit-experience-dialog/edit-experience-dialog.component';
 import { DeleteExperienceDialogComponent } from './delete-experience-dialog/delete-experience-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { ApiServiceAlgo } from './services/api-algo.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +58,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatProgressSpinnerModule,
     MatCheckboxModule
   ],
-  providers: [ApiHttpService,Papa],
+  providers: [ApiHttpService,Papa,ApiServiceAlgo],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
