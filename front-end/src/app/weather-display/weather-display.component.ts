@@ -3,9 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { ApiHttpService } from '../services/api-http.service';
 import { getIconUrl, getUrlFromParams } from '../services/url-paths';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import * as Papa from 'papaparse';
-import { map } from 'rxjs/operators';
+import { ApiServiceAlgo } from '../services/api-algo.service';
 
 @Component({
   selector: 'app-weather-display',
@@ -13,6 +11,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./weather-display.component.sass'],
 })
 export class WeatherDisplayComponent implements OnInit {
+  response: any;
   name = '';
   country = '';
   currentWeather: Weather = {} as Weather;
@@ -34,10 +33,12 @@ export class WeatherDisplayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiHttpService,
-    private http: HttpClient
+    private http: HttpClient,
+    private apiAlgo: ApiServiceAlgo
   ) {}
 
   ngOnInit() {
+    this.sendData();
     this.route.queryParams.subscribe((params) => {
       const info = getInfoFromParams(params);
       if (!info) {
@@ -64,51 +65,8 @@ export class WeatherDisplayComponent implements OnInit {
         error: (err) => console.error(err),
       });
     });
-
-    // Use `this.readCsv` instead of `readCsv`
-    this.readCsv('assets/agenda-cultural-bizkaia-2023.csv').subscribe({
-      next: (data) => {
-        this.csvData = data;
-        console.log('CSV Data:', this.csvData);
-      },
-      error: (error) => console.error('Error reading CSV file:', error),
-    });
-
-    //this.loadCSVData();
   }
 
-  // Move readCsv inside the class
-  readCsv(filePath: string): Observable<any[]> {
-    return this.http.get(filePath, { responseType: 'text' }).pipe(
-      map((csvData: string) => {
-        const parsedData = Papa.parse(csvData, {
-          header: true,
-          skipEmptyLines: true,
-        });
-        return parsedData.data;
-      })
-    );
-  }
-
-    // Function to load and parse the CSV file
-    //loadCSVData(): void {
-    //  const csvFilePath = 'assets/agenda-cultural-bizkaia-2023.csv'; // Replace with the correct path to your CSV file
-//
-    //  Papa.parse(csvFilePath, {
-    //    download: true,
-    //    header: true,
-    //    complete: (result) => {
-    //      // Filter for "sport" activity and get the first 5 entries
-    //      this.dataSource = result.data
-    //        .filter((row: any) => row.category === 'sport') // Adjust 'activity' if column name differs
-    //        .slice(0, 5); // Limit to first 5 entries
-    //    },
-    //    error: (error) => {
-    //      console.error('Error loading CSV file:', error);
-    //    }
-    //  });
-    //  console.log(this.dataSource)
-    //}
     getIcon(category: string): string {
       switch (category) {
         case 'deportes': return 'sports_soccer';
@@ -117,7 +75,27 @@ export class WeatherDisplayComponent implements OnInit {
         default: return 'star';
       }
     }
-}
+
+    sendData(): void {
+      const data = [
+        { category: 'Sports Event', sport: 'Basketball', organizer: 'OrgA' },
+        { category: 'Training', sport: 'Soccer', organizer: 'OrgB' },
+        { category: 'Competition', sport: 'Swimming', organizer: 'OrgC' },
+        { category: 'Sports Event', sport: 'Tennis', organizer: 'OrgA' },
+      ];
+
+      this.apiAlgo.clusterCultura(data).subscribe(
+        (res) => {
+          this.response = res; // Save the response to display in the template
+          console.log('Response:', res);
+        },
+        (err) => {
+          console.error('Error:', err);
+        }
+      );
+    }
+
+  }
 
 export function getInfoFromParams(params: Params) {
   const name = params['name'];
