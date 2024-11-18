@@ -60,7 +60,7 @@ export class WeatherDisplayComponent implements OnInit {
             this.currentWeather.main.feels_like
           );
           this.loaded = true;
-          this.sendData(info.preferences);
+          this.sendData(info,this.currentWeather,this.temperature);
         },
         error: (err) => console.error(err),
       });
@@ -76,7 +76,9 @@ export class WeatherDisplayComponent implements OnInit {
       }
     }
 
-    sendData(preferences:any): void {
+    sendData(preferences:any,currentWeather:any,temperature:any): void {
+      preferences.temperature = temperature;
+      preferences.current_weather = currentWeather;
       const data = [preferences];
 
       this.apiAlgo.clusterCultura(data).subscribe(

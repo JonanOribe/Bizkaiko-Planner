@@ -1,23 +1,12 @@
 from http.client import HTTPException
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from src.models.weather import DataArray
 from src.k_means_cultura import *
 from src.k_means_deporte import *
 import uvicorn
-from typing import List
+from typing import Any, Dict, List
 from fastapi.middleware.cors import CORSMiddleware
-
-# Define the input schema
-class DataItem(BaseModel):
-    sport: bool
-    aventures: bool
-    culture: bool
-    food: bool
-    others: bool
-
-class DataArray(BaseModel):
-    data: List[DataItem]
 
 # Initialize the FastAPI app
 app = FastAPI()
