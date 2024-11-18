@@ -10,9 +10,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Define the input schema
 class DataItem(BaseModel):
-    category: str
-    sport: str
-    organizer: str
+    sport: bool
+    aventures: bool
+    culture: bool
+    food: bool
+    others: bool
 
 class DataArray(BaseModel):
     data: List[DataItem]

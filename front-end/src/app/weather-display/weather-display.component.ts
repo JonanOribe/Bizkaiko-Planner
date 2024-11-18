@@ -38,7 +38,6 @@ export class WeatherDisplayComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sendData();
     this.route.queryParams.subscribe((params) => {
       const info = getInfoFromParams(params);
       if (!info) {
@@ -61,6 +60,7 @@ export class WeatherDisplayComponent implements OnInit {
             this.currentWeather.main.feels_like
           );
           this.loaded = true;
+          this.sendData(info.preferences);
         },
         error: (err) => console.error(err),
       });
@@ -76,13 +76,8 @@ export class WeatherDisplayComponent implements OnInit {
       }
     }
 
-    sendData(): void {
-      const data = [
-        { category: 'Sports Event', sport: 'Basketball', organizer: 'OrgA' },
-        { category: 'Training', sport: 'Soccer', organizer: 'OrgB' },
-        { category: 'Competition', sport: 'Swimming', organizer: 'OrgC' },
-        { category: 'Sports Event', sport: 'Tennis', organizer: 'OrgA' },
-      ];
+    sendData(preferences:any): void {
+      const data = [preferences];
 
       this.apiAlgo.clusterCultura(data).subscribe(
         (res) => {
@@ -97,7 +92,7 @@ export class WeatherDisplayComponent implements OnInit {
 
   }
 
-export function getInfoFromParams(params: Params) {
+export function getInfoFromParams(this: any, params: Params) {
   const name = params['name'];
   const country = params?.['country'];
   const latitude = params?.['lat'];
@@ -109,6 +104,7 @@ export function getInfoFromParams(params: Params) {
     country,
     latitude,
     longitude,
+    preferences
   };
 }
 
