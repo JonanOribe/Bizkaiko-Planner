@@ -62,7 +62,7 @@ class CurrentWeather(BaseModel):
 
 class Preferences(BaseModel):
     sport: Optional[bool]
-    aventures: Optional[bool]
+    adventures: Optional[bool]
     culture: Optional[bool]
     food: Optional[bool]
     others: Optional[bool]

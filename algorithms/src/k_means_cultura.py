@@ -10,8 +10,11 @@ from itertools import chain
 current_directory = os.getcwd()
 translate = {
     'culture': ['antzerkia','dantza','ikus-entzunezko-emanaldia'],
-    'others':['hitzaldia','bertsolaritza','aurkezpena','haur-jarduera','ikastaroa','lehiaketa','bestelakoa'],
-    'music':['kontzertua']
+    'others':['erakusketa','hitzaldia','bertsolaritza','aurkezpena','haur-jarduera','ikastaroa','lehiaketa'],
+    'music':['kontzertua'],
+    'adventures':['bestelakoa'],
+    'sport':['kirola'],
+    'food':['jatetxea']
 }
 
 def filter_location(location):
@@ -21,12 +24,15 @@ def filter_location(location):
 
 def generate_cluster_cultura(records):
     filtered_preferences = {key: value for key, value in records['preferences'].items() if value}
-    flat_list = list(chain.from_iterable([translate[key] for key in filtered_preferences if key in translate]))
-    # Load the dataset
+    flat_list = []
+    for elem in filtered_preferences.items():
+        if elem[1] == True:
+            flat_list.extend(translate[elem[0]])
+    flat_list.extend(translate['others'])
     file_path = 'algorithms\\data\\agenda-cultural-bizkaia-2023.csv'  # Update with your dataset path
     data = pd.read_csv(file_path)
     selected_place:str = filter_location(records['name'])
-    data = data[data['UDALERRIA/MUNICIPIO'] == selected_place]
+    data = data[data['UDALERRIA/MUNICIPIO'].str.contains(selected_place)]
     filtered_data = data[data['EKITALDI MOTA/TIPO EVENTO'].isin(flat_list)]
     
     # Select relevant columns for clustering

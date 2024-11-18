@@ -21,7 +21,7 @@ export class SearchLocationComponent {
         // Initialize the form group with form controls for each checkbox
         this.preferencesForm = this.fb.group({
           sport: [false],
-          aventures: [false],
+          adventures: [false],
           culture: [false],
           food: [false],
           others: [false]
