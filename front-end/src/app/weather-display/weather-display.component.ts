@@ -22,13 +22,13 @@ export class WeatherDisplayComponent implements OnInit {
   csvData: any[] = [];
   // Table columns and data
   displayedColumns: string[] = ['name', 'category', 'price','url'];
-  //dataSource: any[] = [];
-  dataSource = [
-    { name: 'Antzerki partehartzailea, Dantza eta Performance-Arte biziak', category: 'cultura', price: 25,url:'https://www.google.com' },
-    { name: 'Concierto Coral', category: 'música', price: 27,url:'https://www.google.com' },
-    { name: 'Bizkaikoa. Ibiltari Arrigorriaga: Komikia', category: 'cultura', price: 28,url:'https://www.google.com' },
-    { name: 'Itsasmuseum Bilbao. Umeentzako jarduerak. Atlantidaren altxorrak', category: 'cultura', price: 26,url:'https://www.google.com' },
-  ];
+  dataSource: any[] = [];
+  //dataSource = [
+  //  { name: 'Antzerki partehartzailea, Dantza eta Performance-Arte biziak', category: 'cultura', price: 25,url:'https://www.google.com' },
+  //  { name: 'Concierto Coral', category: 'música', price: 27,url:'https://www.google.com' },
+  //  { name: 'Bizkaikoa. Ibiltari Arrigorriaga: Komikia', category: 'cultura', price: 28,url:'https://www.google.com' },
+  //  { name: 'Itsasmuseum Bilbao. Umeentzako jarduerak. Atlantidaren altxorrak', category: 'cultura', price: 26,url:'https://www.google.com' },
+  //];
 
   constructor(
     private route: ActivatedRoute,
@@ -85,6 +85,7 @@ export class WeatherDisplayComponent implements OnInit {
         (res) => {
           this.response = res; // Save the response to display in the template
           console.log('Response:', res);
+          this.dataSource = JSON.parse(res).slice(0, 5);
         },
         (err) => {
           console.error('Error:', err);

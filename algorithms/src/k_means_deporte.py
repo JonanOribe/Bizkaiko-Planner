@@ -41,10 +41,10 @@ def generate_cluster_deporte(records):
     data_subset['PCA2'] = reduced_data[:, 1]
     
     # Plot the clusters
-    plt.figure(figsize=(10, 6))
+    #plt.figure(figsize=(10, 6))
     for cluster in range(kmeans.n_clusters):
         cluster_data = data_subset[data_subset['Cluster'] == cluster]
-        plt.scatter(cluster_data['PCA1'], cluster_data['PCA2'], label=f'Cluster {cluster}')
+        #plt.scatter(cluster_data['PCA1'], cluster_data['PCA2'], label=f'Cluster {cluster}')
     
     # Add cluster centers
     cluster_centers = pca.transform(kmeans.cluster_centers_)
@@ -65,7 +65,7 @@ def generate_cluster_deporte(records):
         print(cluster_elements[relevant_columns].to_string(index=False))
     
     # Save the clustered data to a CSV file (optional)
-    output_path = 'clustered_data_output_deporte.csv'  # Replace with your desired output path
-    data_with_clusters.to_json(output_path, index=False)
+    #output_path = 'clustered_data_output_deporte.csv'  # Replace with your desired output path
+    #data_with_clusters.to_json(output_path, index=False)
     json_dump = json.dumps(json.loads(data_with_clusters.to_json(orient="records")))
     return json_dump
