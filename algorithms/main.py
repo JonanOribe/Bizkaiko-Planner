@@ -5,29 +5,24 @@ from src.models.weather import DataArray
 from src.k_means_cultura import *
 from src.k_means_deporte import *
 import uvicorn
-from typing import Any, Dict, List
 from fastapi.middleware.cors import CORSMiddleware
 
-# Initialize the FastAPI app
 app = FastAPI()
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace "*" with specific origins if needed, e.g., ["http://localhost:4200"]
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all HTTP methods (POST, GET, OPTIONS, etc.)
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Define a route for clustering
 @app.post("/cluster_cultura/")
 async def cluster_cultura(input_data: DataArray):
     records = [item.dict() for item in input_data.data]
-    print(records)
     try:
         try:
-            response = generate_cluster_cultura()
+            response = generate_cluster_cultura(records[0])
         except HTTPException:
             raise HTTPException(status_code=404, detail="Error getting info")
         return response
@@ -38,10 +33,9 @@ async def cluster_cultura(input_data: DataArray):
 @app.post("/cluster_deporte/")
 async def cluster_deporte(input_data: DataArray):
     records = [item.dict() for item in input_data.data]
-    print(records)
     try:
         try:
-            response = generate_cluster_cultura()
+            response = generate_cluster_cultura(records[0])
         except HTTPException:
             raise HTTPException(status_code=404, detail="Error getting info")
         return response

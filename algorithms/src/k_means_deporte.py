@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import json
 
-def generate_cluster_deporte():
+def generate_cluster_deporte(records):
     # Load the dataset
     file_path = 'algorithms\\data\\agenda-kirolbidepro-2023.csv'  # Replace with your file path
     data = pd.read_csv(file_path)

@@ -5,17 +5,33 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import os
 import json
+from itertools import chain
 
 current_directory = os.getcwd()
+translate = {
+    'culture': ['antzerkia','dantza','ikus-entzunezko-emanaldia'],
+    'others':['hitzaldia','bertsolaritza','aurkezpena','haur-jarduera','ikastaroa','lehiaketa','bestelakoa'],
+    'music':['kontzertua']
+}
 
-def generate_cluster_cultura():
+def filter_location(location):
+    if location=='Bilbao':
+        location='Bilbo'
+    return location
+
+def generate_cluster_cultura(records):
+    filtered_preferences = {key: value for key, value in records['preferences'].items() if value}
+    flat_list = list(chain.from_iterable([translate[key] for key in filtered_preferences if key in translate]))
     # Load the dataset
     file_path = 'algorithms\\data\\agenda-cultural-bizkaia-2023.csv'  # Update with your dataset path
     data = pd.read_csv(file_path)
+    selected_place:str = filter_location(records['name'])
+    data = data[data['UDALERRIA/MUNICIPIO'] == selected_place]
+    filtered_data = data[data['EKITALDI MOTA/TIPO EVENTO'].isin(flat_list)]
     
     # Select relevant columns for clustering
     relevant_columns = ['EKITALDI MOTA/TIPO EVENTO', 'EKITALDIAREN KATEGORIA/CATEGORIA EVENTO']
-    data_subset = data[relevant_columns].dropna()
+    data_subset = filtered_data[relevant_columns].dropna()
     
     # Encode categorical data
     label_encoders = {}
