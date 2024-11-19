@@ -134,7 +134,7 @@
 
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef style="text-align: center;">Lugar</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element['LEKUA_EU/LUGAR_EU'] }}</td>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element['LEKUA_EU/LUGAR_EU'] === undefined ? 'No especificado' :  element['LEKUA_EU/LUGAR_EU']  }}</td>
           </ng-container>
 
           <ng-container matColumnDef="url">
@@ -150,7 +150,7 @@
       </div>
     </mat-card-content>
   </mat-card>
-
+  <span class="noEvents" *ngIf="dataSource.length<=1">No hay eventos para esta localización</span>
   <button mat-stroked-button [routerLink]="'/'">Busca experiencias en otro lugar</button>
 </div>
 </body>

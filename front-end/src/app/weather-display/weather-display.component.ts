@@ -78,7 +78,7 @@ export class WeatherDisplayComponent implements OnInit {
         (res) => {
           this.response = res; // Save the response to display in the template
           console.log('Response:', res);
-          this.dataSource = [...res.slice(0, 4),...res.slice(-2, -1)];
+          this.dataSource = [...res.slice(0, 4),...res.slice(-2, -1)].filter((value: {}) => Object.keys(value).length !== 0);
         },
         (err) => {
           console.error('Error:', err);
