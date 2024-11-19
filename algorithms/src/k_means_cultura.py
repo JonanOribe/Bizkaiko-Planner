@@ -66,7 +66,7 @@ def generate_cluster_cultura(records):
     data_subset['PCA2'] = reduced_data[:, 1]
     
     # Plot the clusters
-    plt.figure(figsize=(10, 6))
+    #plt.figure(figsize=(10, 6))
     for cluster in range(kmeans.n_clusters):
         cluster_data = data_subset[data_subset['Cluster'] == cluster]
         #plt.scatter(cluster_data['PCA1'], cluster_data['PCA2'], label=f'Cluster {cluster}')

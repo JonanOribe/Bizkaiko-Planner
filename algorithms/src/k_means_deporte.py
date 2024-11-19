@@ -8,7 +8,8 @@ import json
 def generate_cluster_deporte(records):
     # Load the dataset
     file_path = 'algorithms\\data\\agenda-kirolbidepro-2023.csv'  # Replace with your file path
-    data = pd.read_csv(file_path)
+    data = pd.read_csv(file_path).dropna()
+    data = data[data['LEKUA_EU/UBICACION_EU'].str.contains(records['name'])]
     
     # Select relevant columns for clustering
     relevant_columns = ['EKITALDIAREN KATEGORIA/CATEGORIA EVENTO', 'KIROLAK/DEPORTES', 'ANTOLATZAILEA_EU/ORGANIZADOR_EU']

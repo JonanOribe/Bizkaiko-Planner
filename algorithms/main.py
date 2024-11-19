@@ -22,10 +22,12 @@ async def cluster_cultura(input_data: DataArray):
     records = [item.dict() for item in input_data.data]
     try:
         try:
-            response = generate_cluster_cultura(records[0])
+            response = json.loads(generate_cluster_cultura(records[0]))
+            response_sport = json.loads(generate_cluster_deporte(records[0]))
+            merged = response+response_sport
         except HTTPException:
             raise HTTPException(status_code=404, detail="Error getting info")
-        return response
+        return merged
 
     except Exception as e:
         return JSONResponse({"error": str(e)}, status_code=500)
@@ -35,7 +37,7 @@ async def cluster_deporte(input_data: DataArray):
     records = [item.dict() for item in input_data.data]
     try:
         try:
-            response = generate_cluster_cultura(records[0])
+            response = generate_cluster_deporte(records[0])
         except HTTPException:
             raise HTTPException(status_code=404, detail="Error getting info")
         return response
