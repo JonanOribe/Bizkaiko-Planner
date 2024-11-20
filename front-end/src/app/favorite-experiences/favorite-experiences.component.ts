@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditExperienceDialogComponent } from '../edit-experience-dialog/edit-experience-dialog.component';
 import { DeleteExperienceDialogComponent } from '../delete-experience-dialog/delete-experience-dialog.component';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 interface Experience {
   name: string;
@@ -26,6 +27,12 @@ export class FavoriteExperiencesComponent {
 
   constructor(public dialog: MatDialog) {}
 
+    // Construct the social media sharing URL
+    constructShareUrl(experience: any, comment: string): string {
+      const encodedComment = encodeURIComponent(comment);
+      const encodedName = encodeURIComponent(experience.name);
+      return `https://twitter.com/intent/tweet?text=${encodedComment}%20-Evento:%20${encodedName}`;
+    }
   ngOnInit() {
     this.loadFavorites();
   }
@@ -54,6 +61,20 @@ export class FavoriteExperiencesComponent {
         finalArray.push({name:localStorageFavorites[i]['IZENBURUA_EU/TITULO_EU'], category: 'otros', rating: 4 });
       }
       this.experiences = [...this.experiences, ...finalArray];
+    }
+
+    shareExperience(experience: any): void {
+      const dialogRef = this.dialog.open(ShareDialogComponent, {
+        width: '400px',
+        data: experience
+      });
+
+      dialogRef.afterClosed().subscribe(comment => {
+        if (comment) {
+          const shareUrl = this.constructShareUrl(experience, comment);
+          window.open(shareUrl, '_blank');
+        }
+      });
     }
 
   openDeleteDialog(experience: Experience): void {

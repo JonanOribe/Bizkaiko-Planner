@@ -27,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ApiServiceAlgo } from './services/api-algo.service';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { ApiServiceAlgo } from './services/api-algo.service';
     NavbarComponent,
     EditExperienceDialogComponent,
     DeleteExperienceDialogComponent,
+    ShareDialogComponent,
   ],
   imports: [
     MatFormFieldModule,
