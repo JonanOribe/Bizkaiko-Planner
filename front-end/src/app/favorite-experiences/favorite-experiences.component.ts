@@ -1,5 +1,3 @@
-// favorite-experiences.component.ts
-
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditExperienceDialogComponent } from '../edit-experience-dialog/edit-experience-dialog.component';
@@ -28,6 +26,10 @@ export class FavoriteExperiencesComponent {
 
   constructor(public dialog: MatDialog) {}
 
+  ngOnInit() {
+    this.loadFavorites();
+  }
+
   openEditDialog(experience: Experience): void {
     const dialogRef = this.dialog.open(EditExperienceDialogComponent, {
       width: '300px',
@@ -43,6 +45,16 @@ export class FavoriteExperiencesComponent {
       }
     });
   }
+
+  // Combine existing data with local storage favorites
+  loadFavorites(): void {
+      let finalArray: Experience[] = []
+      const localStorageFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      for (let i = 0; i < localStorageFavorites.length; i++) {
+        finalArray.push({name:localStorageFavorites[i]['IZENBURUA_EU/TITULO_EU'], category: 'otros', rating: 4 });
+      }
+      this.experiences = [...this.experiences, ...finalArray];
+    }
 
   openDeleteDialog(experience: Experience): void {
     const dialogRef = this.dialog.open(DeleteExperienceDialogComponent, {

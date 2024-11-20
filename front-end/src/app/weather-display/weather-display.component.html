@@ -50,7 +50,7 @@
 
     /* Additional container styling */
     .container {
-      padding: 
+      padding:
       0px;
     }
 
@@ -147,9 +147,15 @@
 
           <ng-container matColumnDef="favourite">
             <th mat-header-cell *matHeaderCellDef style="text-align: center;">Guardar</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"><a mat-button [href]="element['LINK/LINK']" target="_blank" class="tableButton" style="color:white">
-              Agregar a favoritos
-            </a></td>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+              <a
+                mat-button
+                class="tableButton"
+                style="color: white;"
+                (click)="addToFavorites(element)">
+                Agregar a favoritos
+              </a>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

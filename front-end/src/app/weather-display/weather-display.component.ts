@@ -60,6 +60,20 @@ export class WeatherDisplayComponent implements OnInit {
     });
   }
 
+  addToFavorites(element: any): void {
+    // Retrieve existing favorites from local storage
+    const existingFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+    // Add the new item to the list
+    existingFavorites.push(element);
+
+    // Save updated list back to local storage
+    localStorage.setItem('favorites', JSON.stringify(existingFavorites));
+
+    // Optionally, notify the user
+    alert('Added to favorites!');
+  }
+
     getIcon(category: string): string {
       switch (category) {
         case 'deportes': return 'sports_soccer';
