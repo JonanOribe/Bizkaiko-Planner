@@ -126,9 +126,9 @@
           </ng-container>
 
           <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef> Categoría </th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Horario </th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">
-              <mat-icon>{{ getIcon(element.category) }} {{element['EKITALDI MOTA/TIPO EVENTO']}}</mat-icon>
+              {{element['ORDUTEGIA_CAS/HORARIO_CAS'] === undefined ? 'No especificado' :  element['ORDUTEGIA_CAS/HORARIO_CAS']}}
             </td>
           </ng-container>
 
