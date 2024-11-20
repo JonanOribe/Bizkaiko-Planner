@@ -50,7 +50,8 @@
 
     /* Additional container styling */
     .container {
-      padding: 20px;
+      padding: 
+      0px;
     }
 
     .title h1 {
@@ -128,19 +129,26 @@
           <ng-container matColumnDef="category">
             <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Horario </th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">
-              {{element['ORDUTEGIA_CAS/HORARIO_CAS'] === undefined ? 'No especificado' :  element['ORDUTEGIA_CAS/HORARIO_CAS']}}
+              {{(element['ORDUTEGIA_CAS/HORARIO_CAS'] === undefined || element['ORDUTEGIA_CAS/HORARIO_CAS'] === null) ? 'No especificado' :  element['ORDUTEGIA_CAS/HORARIO_CAS']}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef style="text-align: center;">Lugar</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element['LEKUA_EU/LUGAR_EU'] === undefined ? 'No especificado' :  element['LEKUA_EU/LUGAR_EU']  }}</td>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">{{ (element['LEKUA_EU/LUGAR_EU'] === undefined || element['ORDUTEGIA_CAS/HORARIO_CAS'] === null)? 'No especificado' :  element['LEKUA_EU/LUGAR_EU']  }}</td>
           </ng-container>
 
           <ng-container matColumnDef="url">
             <th mat-header-cell *matHeaderCellDef style="text-align: center;">Enlace</th>
-            <td mat-cell *matCellDef="let element" style="text-align: center;"><a mat-button [href]="element['LINK/LINK']" target="_blank" style="border: 1px solid #b82927;">
+            <td mat-cell *matCellDef="let element" style="text-align: center;"><a mat-button [href]="element['LINK/LINK']" target="_blank" class="tableButton" style="color:white">
               Link
+            </a></td>
+          </ng-container>
+
+          <ng-container matColumnDef="favourite">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Guardar</th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"><a mat-button [href]="element['LINK/LINK']" target="_blank" class="tableButton" style="color:white">
+              Agregar a favoritos
             </a></td>
           </ng-container>
 

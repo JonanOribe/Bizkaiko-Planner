@@ -20,7 +20,7 @@ export class WeatherDisplayComponent implements OnInit {
   loaded = false;
   iconUrl = '';
   csvData: any[] = [];
-  displayedColumns: string[] = ['name', 'category', 'price','url'];
+  displayedColumns: string[] = ['name', 'category', 'price','url','favourite'];
   dataSource: any[] = [];
 
   constructor(
