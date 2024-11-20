@@ -5,14 +5,14 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nombre del evento </th>
-      <td mat-cell *matCellDef="let experience"> {{ experience.name }} </td>
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Nombre del evento </th>
+      <td mat-cell *matCellDef="let experience" > {{ experience.name }} </td>
     </ng-container>
 
     <!-- Category Column with Icon -->
     <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef> Categoría </th>
-      <td mat-cell *matCellDef="let experience">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Categoría </th>
+      <td mat-cell *matCellDef="let experience" style="text-align: center;">
         <mat-icon>{{ getIcon(experience.category) }}</mat-icon>
         {{ experience.category | titlecase }}
       </td>
@@ -20,8 +20,8 @@
 
     <!-- Rating Column with Stars -->
     <ng-container matColumnDef="rating">
-      <th mat-header-cell *matHeaderCellDef> Rating </th>
-      <td mat-cell *matCellDef="let experience">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Rating </th>
+      <td mat-cell *matCellDef="let experience" style="text-align: center;">
         <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
           <mat-icon *ngIf="star <= experience.rating">star</mat-icon>
           <mat-icon *ngIf="star > experience.rating">star_border</mat-icon>
@@ -31,8 +31,8 @@
 
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let experience">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Acciones </th>
+      <td mat-cell *matCellDef="let experience" style="text-align: center;">
         <button mat-icon-button (click)="openEditDialog(experience)">
           <mat-icon>edit</mat-icon>
         </button>
