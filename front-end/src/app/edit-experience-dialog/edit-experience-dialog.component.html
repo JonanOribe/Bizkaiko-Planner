@@ -9,7 +9,7 @@
   <!-- Experience Rating Selection -->
   <mat-form-field>
     <mat-label>Rating</mat-label>
-    <mat-select [(ngModel)]="data.experience.rating"> <!-- Ensure mat-select is used correctly -->
+    <mat-select [(ngModel)]="data.experience.rating" (selectionChange)="changeRating($event.value)"> <!-- Ensure mat-select is used correctly -->
       <mat-option *ngFor="let rating of [1, 2, 3, 4, 5]" [value]="rating">
         {{ rating }}
       </mat-option>
@@ -19,5 +19,5 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button (click)="onSave()">Guardar</button>
+  <button mat-button (click)="onSave(data.experience.name)">Guardar</button>
 </div>
