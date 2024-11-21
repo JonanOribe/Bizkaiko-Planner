@@ -19,7 +19,7 @@ export class ShareDialogComponent {
   }
 
   // Share with the provided comment
-  share(): void {
-    this.dialogRef.close(this.comment);
+  share(network:string): void {
+    this.dialogRef.close([network,this.comment]);
   }
 }

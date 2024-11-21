@@ -18,21 +18,18 @@ interface Experience {
 export class FavoriteExperiencesComponent {
   displayedColumns: string[] = ['name', 'rating', 'actions'];
   experiences: Experience[] = [];
-  /*
-    { name: 'Bermeoko San Silbestrea 2023', category: 'deportes', rating: 4 },
-    { name: 'Concierto Coral', category: 'música', rating: 5 },
-    { name: 'Bilboko Berreginen Museoa. Gau Irekia 2023', category: 'cultura', rating: 4 },
-    { name: 'Taller de pintura de TOTE BAG', category: 'otros', rating: 3 }
-  ];
-  */
 
   constructor(public dialog: MatDialog) {}
 
   // Construct the social media sharing URL
-  constructShareUrl(experience: any, comment: string): string {
+  constructShareUrl(network:string,experience: any, comment: string): string {
+    let link:string='';
     const encodedComment = encodeURIComponent(comment);
     const encodedName = encodeURIComponent(experience.name);
-    return `https://twitter.com/intent/tweet?text=${encodedComment}%20-Evento:%20${encodedName}`;
+    if(network=='twitter'){
+      link = `https://twitter.com/intent/tweet?text=${encodedComment}%20-Evento:%20${encodedName}`;
+    }
+    return link
   }
 
   ngOnInit() {
@@ -41,16 +38,16 @@ export class FavoriteExperiencesComponent {
   }
 
   removeDuplicatesByTitle(data: any[]) {
-    const uniqueItems = new Map(); // To store unique items by title
+    const uniqueItems = new Map();
 
     data.forEach(item => {
         const title = item['IZENBURUA_EU/TITULO_EU'];
         if (!uniqueItems.has(title)) {
-            uniqueItems.set(title, item); // Add item to map if title is not already present
+            uniqueItems.set(title, item);
         }
     });
 
-    return Array.from(uniqueItems.values()); // Convert map values back to array
+    return Array.from(uniqueItems.values());
 }
 
   deleteDuplicates(){
@@ -77,7 +74,6 @@ export class FavoriteExperiencesComponent {
     });
   }
 
-  // Combine existing data with local storage favourites
   loadFavorites(): void {
       let finalArray: Experience[] = []
       const localStorageFavorites = JSON.parse(localStorage.getItem('favourites') || '[]');
@@ -93,9 +89,9 @@ export class FavoriteExperiencesComponent {
         data: experience
       });
 
-      dialogRef.afterClosed().subscribe(comment => {
-        if (comment) {
-          const shareUrl = this.constructShareUrl(experience, comment);
+      dialogRef.afterClosed().subscribe(items => {
+        if (items[1]) {
+          const shareUrl = this.constructShareUrl(items[0],experience, items[1]);
           window.open(shareUrl, '_blank');
         }
       });
