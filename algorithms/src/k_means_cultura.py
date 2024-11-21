@@ -93,6 +93,11 @@ def generate_cluster_cultura(records,local_storage):
         # Save the clustered data to a CSV file (optional)
         #output_path = 'clustered_data_output_cultura.csv'  # Replace with your desired output path
         #data_with_clusters.to_json(output_path, index=False)
+        if len(good_ratings)>0:
+            # Create a sorting key: 1 if the row contains any of the words, 0 otherwise
+            data_with_clusters['SortKey'] = data_with_clusters['EKITALDI MOTA/TIPO EVENTO'].str.contains('|'.join(good_ratings), case=False, na=False).astype(int)
+            # Sort by the SortKey in descending order (rows with prioritized words on top)
+            data_with_clusters = data_with_clusters.sort_values(by="SortKey", ascending=False).drop(columns="SortKey")
         json_dump = json.dumps(json.loads(data_with_clusters.to_json(orient="records")))
         return json_dump
     except Exception as e:
