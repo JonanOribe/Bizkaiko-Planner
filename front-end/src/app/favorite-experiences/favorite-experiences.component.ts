@@ -16,7 +16,6 @@ interface Experience {
   styleUrls: ['./favorite-experiences.component.sass']
 })
 export class FavoriteExperiencesComponent {
-  // Add "actions" to displayedColumns array
   displayedColumns: string[] = ['name', 'rating', 'actions'];
   experiences: Experience[] = [];
   /*
@@ -29,14 +28,37 @@ export class FavoriteExperiencesComponent {
 
   constructor(public dialog: MatDialog) {}
 
-    // Construct the social media sharing URL
-    constructShareUrl(experience: any, comment: string): string {
-      const encodedComment = encodeURIComponent(comment);
-      const encodedName = encodeURIComponent(experience.name);
-      return `https://twitter.com/intent/tweet?text=${encodedComment}%20-Evento:%20${encodedName}`;
-    }
+  // Construct the social media sharing URL
+  constructShareUrl(experience: any, comment: string): string {
+    const encodedComment = encodeURIComponent(comment);
+    const encodedName = encodeURIComponent(experience.name);
+    return `https://twitter.com/intent/tweet?text=${encodedComment}%20-Evento:%20${encodedName}`;
+  }
+
   ngOnInit() {
+    this.deleteDuplicates();
     this.loadFavorites();
+  }
+
+  removeDuplicatesByTitle(data: any[]) {
+    const uniqueItems = new Map(); // To store unique items by title
+
+    data.forEach(item => {
+        const title = item['IZENBURUA_EU/TITULO_EU'];
+        if (!uniqueItems.has(title)) {
+            uniqueItems.set(title, item); // Add item to map if title is not already present
+        }
+    });
+
+    return Array.from(uniqueItems.values()); // Convert map values back to array
+}
+
+  deleteDuplicates(){
+    let getFavourites = JSON.parse(localStorage.getItem('favourites') || '[]');
+    if(getFavourites!==null){
+      const unique = this.removeDuplicatesByTitle(getFavourites)
+      localStorage.setItem('favourites',JSON.stringify(unique));
+    }
   }
 
   openEditDialog(experience: Experience): void {
