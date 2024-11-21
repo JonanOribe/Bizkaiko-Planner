@@ -55,10 +55,10 @@ export class FavoriteExperiencesComponent {
     });
   }
 
-  // Combine existing data with local storage favorites
+  // Combine existing data with local storage favourites
   loadFavorites(): void {
       let finalArray: Experience[] = []
-      const localStorageFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const localStorageFavorites = JSON.parse(localStorage.getItem('favourites') || '[]');
       for (let i = 0; i < localStorageFavorites.length; i++) {
         finalArray.push({name:localStorageFavorites[i]['IZENBURUA_EU/TITULO_EU'], category: 'otros', rating: 4 });
       }

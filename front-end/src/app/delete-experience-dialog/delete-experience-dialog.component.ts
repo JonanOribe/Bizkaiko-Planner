@@ -11,8 +11,10 @@ export class DeleteExperienceDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  onConfirm(): void {
+  onConfirm(element:string): void {
     this.dialogRef.close(true);
+    let filteredData = JSON. parse(localStorage['favourites']).filter((elem: { [x: string]: string; }) => elem['IZENBURUA_EU/TITULO_EU']!==element);
+    localStorage.setItem('favourites',JSON.stringify(filteredData))
   }
 
   onCancel(): void {

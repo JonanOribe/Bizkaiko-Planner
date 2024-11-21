@@ -61,14 +61,14 @@ export class WeatherDisplayComponent implements OnInit {
   }
 
   addToFavorites(element: any): void {
-    // Retrieve existing favorites from local storage
-    const existingFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    // Retrieve existing favourites from local storage
+    const existingFavorites = JSON.parse(localStorage.getItem('favourites') || '[]');
 
     // Add the new item to the list
     existingFavorites.push(element);
 
     // Save updated list back to local storage
-    localStorage.setItem('favorites', JSON.stringify(existingFavorites));
+    localStorage.setItem('favourites', JSON.stringify(existingFavorites));
 
     // Optionally, notify the user
     alert('Agregado a favoritos!');
