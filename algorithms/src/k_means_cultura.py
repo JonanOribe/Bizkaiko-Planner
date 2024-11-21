@@ -21,8 +21,9 @@ def filter_location(location):
         location='Bilbo'
     return location
 
-def generate_cluster_cultura(records):
+def generate_cluster_cultura(records,local_storage):
     try:
+        good_ratings = list(set([val['EKITALDI MOTA/TIPO EVENTO'] for val in local_storage if val['rating']>=1]))
         filtered_preferences = {key: value for key, value in records['preferences'].items() if value}
         flat_list = []
         for elem in filtered_preferences.items():

@@ -86,6 +86,7 @@ export class WeatherDisplayComponent implements OnInit {
     sendData(preferences:any,currentWeather:any,temperature:any): void {
       preferences.temperature = temperature;
       preferences.current_weather = currentWeather;
+      preferences.localStorage = localStorage.getItem('favourites') ?? ''
       const data = [preferences];
 
       this.apiAlgo.clusterCultura(data).subscribe(

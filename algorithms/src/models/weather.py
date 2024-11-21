@@ -74,6 +74,7 @@ class LocationData(BaseModel):
     latitude: Optional[str]
     longitude: Optional[str]
     preferences: Optional[Preferences]
+    localStorage: Optional[str]
     temperature: Optional[int]
     current_weather: Optional[CurrentWeather]
 

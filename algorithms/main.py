@@ -20,11 +20,12 @@ app.add_middleware(
 @app.post("/cluster_cultura/")
 async def cluster_cultura(input_data: DataArray):
     records = [item.dict() for item in input_data.data]
+    local_storage = json.loads(records[0]['localStorage'])
     try:
         try:
-            response = json.loads(generate_cluster_cultura(records[0]))
+            response = json.loads(generate_cluster_cultura(records[0],local_storage))
             if records[0]['preferences']['sport'] == True:
-                response_sport = json.loads(generate_cluster_deporte(records[0]))
+                response_sport = json.loads(generate_cluster_deporte(records[0],local_storage))
                 response = response+response_sport
         except HTTPException:
             raise HTTPException(status_code=404, detail="Error getting info")
