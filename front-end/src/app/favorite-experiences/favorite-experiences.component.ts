@@ -17,13 +17,15 @@ interface Experience {
 })
 export class FavoriteExperiencesComponent {
   // Add "actions" to displayedColumns array
-  displayedColumns: string[] = ['name', 'category', 'rating', 'actions'];
-  experiences: Experience[] = [
+  displayedColumns: string[] = ['name', 'rating', 'actions'];
+  experiences: Experience[] = [];
+  /*
     { name: 'Bermeoko San Silbestrea 2023', category: 'deportes', rating: 4 },
     { name: 'Concierto Coral', category: 'música', rating: 5 },
     { name: 'Bilboko Berreginen Museoa. Gau Irekia 2023', category: 'cultura', rating: 4 },
     { name: 'Taller de pintura de TOTE BAG', category: 'otros', rating: 3 }
   ];
+  */
 
   constructor(public dialog: MatDialog) {}
 

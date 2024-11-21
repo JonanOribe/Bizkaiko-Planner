@@ -71,7 +71,7 @@ export class WeatherDisplayComponent implements OnInit {
     localStorage.setItem('favorites', JSON.stringify(existingFavorites));
 
     // Optionally, notify the user
-    alert('Added to favorites!');
+    alert('Agregado a favoritos!');
   }
 
     getIcon(category: string): string {
