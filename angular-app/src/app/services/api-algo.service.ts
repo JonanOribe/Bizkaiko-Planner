@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root', // Ensures the service is available application-wide
 })
 export class ApiServiceAlgo {
-  private apiUrl = 'http://127.0.0.1:8006/cluster_cultura/'; // Replace with your endpoint URL
+  private apiUrl = 'http://fastapi-app:8006/cluster_cultura/'; // Replace with your endpoint URL
 
   constructor(private http: HttpClient) {}
 
