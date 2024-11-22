@@ -26,8 +26,10 @@ export class FavoriteExperiencesComponent {
     let link:string='';
     const encodedComment = encodeURIComponent(comment);
     const encodedName = encodeURIComponent(experience.name);
-    if(network=='twitter'){
+    if (network === 'twitter') {
       link = `https://twitter.com/intent/tweet?text=${encodedComment}%20-Evento:%20${encodedName}`;
+    } else if (network === 'facebook') {
+      link = `https://www.facebook.com/sharer/sharer.php?quote=${encodedComment}%20-Evento:%20${encodedName}`;
     }
     return link
   }

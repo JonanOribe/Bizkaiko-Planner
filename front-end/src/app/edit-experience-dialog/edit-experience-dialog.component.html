@@ -1,3 +1,4 @@
+<div style="text-align:center;border-bottom: 5px #b82927 solid;">
 <h1 mat-dialog-title>Editar experiencia</h1>
 <div mat-dialog-content>
   <!-- Experience Name Input -->
@@ -18,6 +19,9 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancelar</button>
-  <button mat-button (click)="onSave(data.experience.name)">Guardar</button>
+  <div style="text-align:center;width: 100%;">
+    <button mat-button (click)="onCancel()">Cancelar</button>
+    <button mat-button (click)="onSave(data.experience.name)">Guardar</button>
+  </div>
+</div>
 </div>

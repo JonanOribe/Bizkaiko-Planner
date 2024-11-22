@@ -1,8 +1,12 @@
+<div style="text-align:center;border-bottom: 5px #b82927 solid;">
 <h1 mat-dialog-title>Confirmar borrado</h1>
 <div mat-dialog-content>
   Estas seguro de que quieres borrar {{ data.experience.name }}?
 </div>
 <div mat-dialog-actions>
+  <div style="text-align:center;width: 100%;">
   <button mat-button (click)="onCancel()">Cancelar</button>
   <button mat-button color="warn" (click)="onConfirm(data.experience.name)">Borrar</button>
+</div>
+</div>
 </div>
