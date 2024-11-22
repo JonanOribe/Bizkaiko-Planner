@@ -20,7 +20,11 @@ app.add_middleware(
 @app.post("/cluster_cultura/")
 async def cluster_cultura(input_data: DataArray):
     records = [item.dict() for item in input_data.data]
-    local_storage = json.loads(records[0]['localStorage'])
+    local_storage = []
+    try:
+        local_storage = json.loads(records[0]['localStorage'])
+    except:
+        pass
     try:
         try:
             response = json.loads(generate_cluster_cultura(records[0],local_storage))

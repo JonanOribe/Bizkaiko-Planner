@@ -23,14 +23,16 @@ def filter_location(location):
 
 def generate_cluster_cultura(records,local_storage):
     try:
-        good_ratings = list(set([val['EKITALDI MOTA/TIPO EVENTO'] for val in local_storage if val['rating']>=1]))
+        good_ratings = []
+        if len(local_storage)>0:
+            good_ratings = list(set([val['EKITALDI MOTA/TIPO EVENTO'] for val in local_storage if val['rating']>=1]))
         filtered_preferences = {key: value for key, value in records['preferences'].items() if value}
         flat_list = []
         for elem in filtered_preferences.items():
             if elem[1] == True:
                 flat_list.extend(translate[elem[0]])
         flat_list.extend(translate['others'])
-        file_path = 'algorithms\\data\\agenda-cultural-bizkaia-2023.csv'  # Update with your dataset path
+        file_path = '.\\data\\agenda-cultural-bizkaia-2023.csv'
         data = pd.read_csv(file_path)
         selected_place:str = filter_location(records['name'])
         data = data[data['UDALERRIA/MUNICIPIO'].str.contains(selected_place)]
@@ -101,4 +103,5 @@ def generate_cluster_cultura(records,local_storage):
         json_dump = json.dumps(json.loads(data_with_clusters.to_json(orient="records")))
         return json_dump
     except Exception as e:
+        print(e)
         return '[{}]'

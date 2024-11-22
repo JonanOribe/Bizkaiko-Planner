@@ -8,7 +8,7 @@ import json
 def generate_cluster_deporte(records,local_storage):
     try:
         # Load the dataset
-        file_path = 'algorithms\\data\\agenda-kirolbidepro-2023.csv'  # Replace with your file path
+        file_path = '.\\data\\agenda-kirolbidepro-2023.csv'
         data = pd.read_csv(file_path).dropna()
         data = data[data['LEKUA_EU/UBICACION_EU'].str.contains(records['name'])]
         if records['current_weather']['main']['feels_like']<=4:
@@ -29,7 +29,7 @@ def generate_cluster_deporte(records,local_storage):
         data_scaled = scaler.fit_transform(data_subset)
 
         # Apply K-Means clustering
-        kmeans = KMeans(n_clusters=4, random_state=42)  # Adjust the number of clusters as needed
+        kmeans = KMeans(n_clusters=4, random_state=42)
         data_subset['Cluster'] = kmeans.fit_predict(data_scaled)
 
         # Add original data back to the dataset for reference
@@ -73,4 +73,5 @@ def generate_cluster_deporte(records,local_storage):
         json_dump = json.dumps(json.loads(data_with_clusters.to_json(orient="records")))
         return json_dump
     except Exception as e:
+        print(e)
         return '[{}]'
