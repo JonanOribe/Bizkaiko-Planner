@@ -12,8 +12,8 @@ RUN pip install --no-cache-dir --requirement /app/requirements.txt
 
 COPY . /app
 
-EXPOSE 8006
+EXPOSE 8000
 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["python3", "main.py","--host", "0.0.0.0", "--port", "8006"]
+CMD ["python3", "main.py","--host", "0.0.0.0", "--port", "8000"]

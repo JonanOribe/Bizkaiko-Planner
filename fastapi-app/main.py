@@ -35,4 +35,4 @@ async def cluster_cultura(input_data: DataArray):
         return JSONResponse({"error": str(e)}, status_code=500)
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8006)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

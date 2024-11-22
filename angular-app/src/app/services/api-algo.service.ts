@@ -3,10 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root', // Ensures the service is available application-wide
+  providedIn: 'root',
 })
 export class ApiServiceAlgo {
-  private apiUrl = 'http://fastapi-app:8006/cluster_cultura/'; // Replace with your endpoint URL
+  private apiUrl = 'http://localhost:8000/cluster_cultura/';
 
   constructor(private http: HttpClient) {}
 
