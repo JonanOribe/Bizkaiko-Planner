@@ -1,13 +1,19 @@
-FROM python:3
+FROM python:3.10.9-slim
 
-RUN pip install --upgrade pip
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends --no-install-suggests \
+  build-essential && apt-get clean \
+  && pip install --no-cache-dir --upgrade pip
 
-WORKDIR ./
+WORKDIR /app
+COPY ./requirements.txt /app
+COPY ./config.cfg /app
+RUN pip install --no-cache-dir --requirement /app/requirements.txt
 
-COPY requirements.txt .
+COPY . /app
 
-ADD main.py /
+EXPOSE 8006
 
-RUN pip install -r requirements.txt
+ENV PYTHONUNBUFFERED=1
 
-CMD [ "python", "./main.py" ]
+CMD ["gunicorn","--workers", "3","--worker-class", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8000","--timeout","600"]
