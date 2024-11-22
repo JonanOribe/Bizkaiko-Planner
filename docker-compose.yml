@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  angular-app:
+    build:
+      context: ./angular-app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - fastapi-app
+    networks:
+      - app-network
+
+  fastapi-app:
+    build:
+      context: ./fastapi-app
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
