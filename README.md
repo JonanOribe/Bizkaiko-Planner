@@ -22,11 +22,11 @@ Go to https://www.docker.com/
 
 ## Create Back-End docker image
 
-cd algorithms && docker build -t fastapi-app .
+cd fastapi-app && docker build -t fastapi-app .
 
 ## Create Front-End docker image
 
-cd front-end && ng build && docker build -t angular-app .
+cd angular-app && ng build && docker build -t angular-app .
 
 ## Launch Docker compose
 

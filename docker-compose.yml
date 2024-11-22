@@ -17,7 +17,7 @@ services:
       context: ./fastapi-app
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8006:8000"
     networks:
       - app-network
 

@@ -16,4 +16,4 @@ EXPOSE 8006
 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["gunicorn","--workers", "3","--worker-class", "uvicorn.workers.UvicornWorker", "main:app", "--bind", "0.0.0.0:8000","--timeout","600"]
+CMD ["python3", "main.py","--host", "0.0.0.0", "--port", "8006"]
