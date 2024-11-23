@@ -80,7 +80,7 @@ export class FavoriteExperiencesComponent {
       let finalArray: Experience[] = []
       const localStorageFavorites = JSON.parse(localStorage.getItem('favourites') || '[]');
       for (let i = 0; i < localStorageFavorites.length; i++) {
-        finalArray.push({name:localStorageFavorites[i]['IZENBURUA_EU/TITULO_EU'], category: 'otros', rating: localStorageFavorites[i]['rating']?localStorageFavorites[i]['rating']:5 });
+        finalArray.push({name:localStorageFavorites[i]['IZENBURUA_EU/TITULO_EU'], category: 'otros', rating: localStorageFavorites[i]['rating']?localStorageFavorites[i]['rating']:3 });
       }
       this.experiences = [...this.experiences, ...finalArray];
     }

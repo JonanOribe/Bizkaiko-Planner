@@ -25,7 +25,10 @@ def generate_cluster_cultura(records,local_storage):
     try:
         good_ratings = []
         if len(local_storage)>0:
-            good_ratings = list(set([val['EKITALDI MOTA/TIPO EVENTO'] for val in local_storage if val['rating']>=1]))
+            try:
+                good_ratings = list(set([val['EKITALDI MOTA/TIPO EVENTO'] for val in local_storage if val['rating']==5]))
+            except:
+                pass
         filtered_preferences = {key: value for key, value in records['preferences'].items() if value}
         flat_list = []
         for elem in filtered_preferences.items():

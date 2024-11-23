@@ -72,6 +72,10 @@
               "browserTarget": "angular-app:build:development"
             }
           },
+          "options": {
+            "browserTarget": "project:build",
+            "host": "0.0.0.0"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

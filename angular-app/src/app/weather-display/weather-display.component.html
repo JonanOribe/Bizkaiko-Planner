@@ -84,7 +84,7 @@
     </h1>
   </div>
 
-  <mat-card class="main" style="border-bottom: 1px #b82927 solid;max-width: 1200px;">
+  <mat-card class="main" style="border-bottom: 1px #b82927 solid;max-width: 1600px;min-width: 1600px;">
     <mat-card-content>
       <mat-spinner *ngIf="!loaded"></mat-spinner>
 
@@ -119,7 +119,7 @@
 
       <div style="margin: 8px;">
         <h2 style="text-align: center;">Actividades recomendadas</h2>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-top: 10px;padding: 10px;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-top: 10px;padding: 5px;">
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef style="text-align: center;">Nombre del evento</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element['IZENBURUA_EU/TITULO_EU'] }}</td>
@@ -138,14 +138,14 @@
           </ng-container>
 
           <ng-container matColumnDef="url">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Enlace</th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;">Enlace</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;"><a mat-button [href]="element['LINK/LINK']" target="_blank" class="tableButton" style="color:white;padding: 0.2em;">
               Link
             </a></td>
           </ng-container>
 
           <ng-container matColumnDef="favourite">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Favoritos</th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;">Favoritos</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">
               <a
                 mat-button

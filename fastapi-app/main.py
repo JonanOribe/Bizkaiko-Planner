@@ -19,24 +19,31 @@ app.add_middleware(
 
 @app.post("/cluster_cultura/")
 async def cluster_cultura(input_data: DataArray):
-    records = [item.dict() for item in input_data.data]
-    local_storage = []
     try:
-        local_storage = json.loads(records[0]['localStorage'])
-    except:
-        pass
-    try:
+        records = [item.dict() for item in input_data.data]
+        local_storage = []
         try:
-            response = json.loads(generate_cluster_cultura(records[0],local_storage))
-            if records[0]['preferences']['sport'] == True:
-                response_sport = json.loads(generate_cluster_deporte(records[0],local_storage))
-                response = response+response_sport
-        except HTTPException:
-            raise HTTPException(status_code=404, detail="Error getting info")
-        return response
+            local_storage = json.loads(records[0]['localStorage'])
+        except:
+            pass
+        try:
+            try:
+                response = json.loads(generate_cluster_cultura(records[0],local_storage))
+                if records[0]['preferences']['sport'] == True:
+                    response_sport = json.loads(generate_cluster_deporte(records[0],local_storage))
+                    response = response+response_sport
+            except HTTPException:
+                raise HTTPException(status_code=404, detail="Error getting info")
+            return response
 
+        except Exception as e:
+            return JSONResponse({"error": str(e)}, status_code=500)
     except Exception as e:
-        return JSONResponse({"error": str(e)}, status_code=500)
+        print(e)
+        return e
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    try:
+        uvicorn.run(app, host="0.0.0.0", port=8032)
+    except Exception as e:
+        print(e)
