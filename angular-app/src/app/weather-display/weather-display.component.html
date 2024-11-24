@@ -121,31 +121,31 @@
         <h2 style="text-align: center;">Actividades recomendadas</h2>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%; margin-top: 10px;padding: 5px;">
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Nombre del evento</th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;">Nombre del evento</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">{{ element['IZENBURUA_EU/TITULO_EU'] }}</td>
           </ng-container>
 
           <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Horario </th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;width: 150px;"> Horario </th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">
               {{(element['ORDUTEGIA_CAS/HORARIO_CAS'] === undefined || element['ORDUTEGIA_CAS/HORARIO_CAS'] === null) ? 'No especificado' :  element['ORDUTEGIA_CAS/HORARIO_CAS']}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;">Lugar</th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;width: 200px;">Lugar</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">{{ (element['LEKUA_EU/LUGAR_EU'] === undefined || element['ORDUTEGIA_CAS/HORARIO_CAS'] === null)? 'No especificado' :  element['LEKUA_EU/LUGAR_EU']  }}</td>
           </ng-container>
 
           <ng-container matColumnDef="url">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;">Enlace</th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;width: 150px;">Enlace</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;"><a mat-button [href]="element['LINK/LINK']" target="_blank" class="tableButton" style="color:white;padding: 0.2em;">
               Link
             </a></td>
           </ng-container>
 
           <ng-container matColumnDef="favourite">
-            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;">Favoritos</th>
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 2em;width: 150px;">Favoritos</th>
             <td mat-cell *matCellDef="let element" style="text-align: center;">
               <a
                 mat-button
