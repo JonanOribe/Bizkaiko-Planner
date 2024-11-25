@@ -8,9 +8,12 @@ import json
 def generate_cluster_deporte(records,local_storage):
     try:
         # Load the dataset
-        file_path = '.\\data\\agenda-kirolbidepro-2023.csv'
+        file_path = '.\\fastapi-app\\data\\agenda-kirolbidepro-2023.csv'
         data = pd.read_csv(file_path).dropna()
         data = data[data['LEKUA_EU/UBICACION_EU'].str.contains(records['name'])]
+        if len(local_storage)>0:
+            already_liked = [elem['IZENBURUA_EU/TITULO_EU'] for elem in local_storage]
+            data = data[~data['IZENBURUA_EU/TITULO_EU'].isin(already_liked)]
         if records['current_weather']['main']['feels_like']<=4:
             data= data.drop(data[data['KIROLAK/DEPORTES'] == 'Atletismoa'].index)
         # Select relevant columns for clustering

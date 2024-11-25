@@ -35,10 +35,14 @@ def generate_cluster_cultura(records,local_storage):
             if elem[1] == True:
                 flat_list.extend(translate[elem[0]])
         flat_list.extend(translate['others'])
-        file_path = '.\\data\\agenda-cultural-bizkaia-2023.csv'
+
+        file_path = '.\\fastapi-app\\data\\agenda-cultural-bizkaia-2023.csv'
         data = pd.read_csv(file_path)
         selected_place:str = filter_location(records['name'])
         data = data[data['UDALERRIA/MUNICIPIO'].str.contains(selected_place)]
+        if len(local_storage)>0:
+            already_liked = [elem['IZENBURUA_EU/TITULO_EU'] for elem in local_storage]
+            data = data[~data['IZENBURUA_EU/TITULO_EU'].isin(already_liked)]
         filtered_data = data[data['EKITALDI MOTA/TIPO EVENTO'].isin(flat_list)]
 
         # Select relevant columns for clustering
@@ -89,11 +93,11 @@ def generate_cluster_cultura(records,local_storage):
         #plt.show()
 
         # Show elements inside each cluster
-        print("Elements inside each cluster:")
+        #print("Elements inside each cluster:")
         for cluster in range(kmeans.n_clusters):
             cluster_elements = data_with_clusters[data_with_clusters['Cluster'] == cluster]
-            print(f"\nCluster {cluster}:\n")
-            print(cluster_elements[relevant_columns].to_string(index=False))
+            #print(f"\nCluster {cluster}:\n")
+            #print(cluster_elements[relevant_columns].to_string(index=False))
 
         # Save the clustered data to a CSV file (optional)
         #output_path = 'clustered_data_output_cultura.csv'  # Replace with your desired output path

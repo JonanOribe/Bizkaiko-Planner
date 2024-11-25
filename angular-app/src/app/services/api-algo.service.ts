@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiServiceAlgo {
   private apiUrl = 'https://bplannervm.quantum-mads.top/cluster_cultura/';
-
+  //private apiUrl = 'http://localhost:8032/cluster_cultura/';
   constructor(private http: HttpClient) {}
 
   clusterCultura(data: any): Observable<any> {
